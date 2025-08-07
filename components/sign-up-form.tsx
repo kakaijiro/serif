@@ -47,7 +47,14 @@ export function SignUpForm({ className, ...props }: React.ComponentPropsWithoutR
       if (error) throw error
       router.push('/auth/sign-up-success')
     } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : 'An error occurred')
+      console.error('Sign-up error:', error)
+      if (error instanceof Error) {
+        setError(error.message)
+      } else if (typeof error === 'object' && error !== null && 'message' in error) {
+        setError(String(error.message))
+      } else {
+        setError('Database error saving new user')
+      }
     } finally {
       setIsLoading(false)
     }
