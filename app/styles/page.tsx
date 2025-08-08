@@ -49,7 +49,7 @@ export default function StylesPage() {
         <div className="space-y-4">
           <h1 className="text-4xl font-bold">Design System</h1>
           <p className="text-muted-foreground text-lg">
-            A comprehensive showcase of Serif's design tokens, colors, typography, and components.
+            A comprehensive showcase of Serif&apos;s design tokens, colors, typography, and components.
           </p>
         </div>
 
