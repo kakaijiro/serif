@@ -28,7 +28,7 @@ export async function withMutationToast<T>(
   messages: WithMutationToastMessages = {}
 ): Promise<T> {
   const { loading = "Saving...", success = "Saved", error = "Something went wrong" } = messages
-  return toast.promise(
+  const result = toast.promise(
     mutation(),
     {
       loading,
@@ -36,6 +36,14 @@ export async function withMutationToast<T>(
       error,
     }
   )
+  
+  // Handle the unwrap method if it exists
+  if (typeof result === 'object' && result !== null && 'unwrap' in result) {
+    return result.unwrap()
+  }
+  
+  // If no unwrap method, return the result directly
+  return result as T
 }
 
 function getErrorMessage(error: unknown): string | undefined {

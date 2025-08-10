@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { SonnerToaster } from "@/components/ui/sonner-toaster";
 import { RouteToast } from "@/components/ui/route-toast";
+import { Suspense } from "react";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -26,7 +27,9 @@ export default function RootLayout({
       >
         {children}
         <SonnerToaster />
-        <RouteToast />
+        <Suspense fallback={null}>
+          <RouteToast />
+        </Suspense>
       </body>
     </html>
   );

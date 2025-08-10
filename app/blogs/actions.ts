@@ -104,7 +104,7 @@ export async function updateBlog(slug: string, formData: FormData) {
   redirect(`/blogs/${slug}?toast=updated`)
 }
 
-export async function deleteBlog(slug: string, _formData: FormData) {
+export async function deleteBlog(slug: string) {
   const supabase = await createServerSupabaseClient()
 
   const { data: { user } } = await supabase.auth.getUser()
