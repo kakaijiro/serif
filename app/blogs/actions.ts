@@ -54,7 +54,7 @@ export async function createBlog(formData: FormData) {
   }
 
   revalidatePath("/blogs")
-  redirect(`/blogs/${data.slug}`)
+  redirect(`/blogs/${data.slug}?toast=created`)
 }
 
 export async function updateBlog(slug: string, formData: FormData) {
@@ -99,9 +99,9 @@ export async function updateBlog(slug: string, formData: FormData) {
   revalidatePath("/blogs")
   revalidatePath(`/blogs/${data.slug}`)
   if (data.slug !== slug) {
-    redirect(`/blogs/${data.slug}`)
+    redirect(`/blogs/${data.slug}?toast=updated`)
   }
-  redirect(`/blogs/${slug}`)
+  redirect(`/blogs/${slug}?toast=updated`)
 }
 
 export async function deleteBlog(slug: string, _formData: FormData) {
@@ -122,7 +122,7 @@ export async function deleteBlog(slug: string, _formData: FormData) {
   }
 
   revalidatePath("/blogs")
-  redirect("/blogs")
+  redirect("/blogs?toast=deleted")
 }
 
 

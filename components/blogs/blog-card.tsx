@@ -1,7 +1,8 @@
+import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Eye, Pencil, CheckCircle2, CircleDot, Clock3 } from 'lucide-react'
+import { Eye, CheckCircle2, CircleDot, Clock3 } from 'lucide-react'
 
 export interface BlogPost {
   id: string
@@ -55,11 +56,10 @@ export function BlogCard({ post }: BlogCardProps) {
           <span>{new Date(post.date).toLocaleDateString()}</span>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="sm" className="h-8 px-2">
-            <Eye className="h-4 w-4 mr-1" /> View
-          </Button>
-          <Button variant="ghost" size="sm" className="h-8 px-2">
-            <Pencil className="h-4 w-4 mr-1" /> Edit
+          <Button asChild variant="ghost" size="sm" className="h-8 px-2">
+            <Link href={`/blogs/${post.id}`}>
+              <Eye className="h-4 w-4 mr-1" /> View
+            </Link>
           </Button>
         </div>
       </CardFooter>
