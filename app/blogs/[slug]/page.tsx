@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { notFound } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
 import type { Blog } from "@/types/blog"
@@ -26,8 +27,27 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
           </form>
         </div>
       </div>
-      <article className="prose dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: blog.content }} />
-      <p className="text-sm text-muted-foreground">By {blog.author}</p>
+
+      {/* Cover Image */}
+      {blog.image && (
+        <div className="relative aspect-video w-full max-w-4xl mx-auto overflow-hidden rounded-lg">
+          <Image
+            src={blog.image}
+            alt={blog.title}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+            priority
+          />
+        </div>
+      )}
+
+      <div className="max-w-4xl mx-auto">
+        <p className="text-sm text-muted-foreground mb-6">
+          By {blog.author} • {new Date(blog.created_at).toLocaleDateString()}
+        </p>
+        <article className="prose dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: blog.content }} />
+      </div>
     </main>
   )
 }

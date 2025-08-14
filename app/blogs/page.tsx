@@ -23,6 +23,7 @@ export default async function BlogsIndexPage() {
     status: 'Published',
     readTimeMin: Math.ceil((blog.content.replace(/<[^>]*>/g, '').length / 200)), // Rough estimate: 200 chars per minute
     tags: [], // You can add tags to your blog schema later if needed
+    image: blog.image,
   }))
 
   return (
