@@ -8,6 +8,8 @@ import { Suspense } from "react";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  fallback: ["system-ui", "arial"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {

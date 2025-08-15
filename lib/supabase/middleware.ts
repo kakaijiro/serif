@@ -35,8 +35,21 @@ export async function updateSession(request: NextRequest) {
 
   // IMPORTANT: If you remove getClaims() and you use server-side rendering
   // with the Supabase client, your users may be randomly logged out.
-  const { data } = await supabase.auth.getClaims()
-  const user = data?.claims
+  let user = null;
+  
+  try {
+    const { data, error } = await supabase.auth.getClaims()
+    if (error) {
+      console.warn('Auth check failed:', error.message);
+      // On auth failure, allow the request to continue to avoid blocking the app
+      return supabaseResponse;
+    }
+    user = data?.claims;
+  } catch (error) {
+    console.warn('Network error during auth check:', error);
+    // On network error, allow the request to continue
+    return supabaseResponse;
+  }
 
   if (
     !user &&
