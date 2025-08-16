@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
 
     // Create streaming response - use standard gpt-3.5-turbo model
     const result = await streamText({
-      model: openai('gpt-3.5-turbo-1106'),
+      model: openai('gpt-3.5-turbo'),
       messages: openAIMessages,
       system: 'You are a helpful AI assistant. Provide thoughtful, accurate responses.',
       onFinish: async ({ text }) => {
